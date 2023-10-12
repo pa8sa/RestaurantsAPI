@@ -1,0 +1,30 @@
+[
+  {
+    "name": "John Doe",
+    "address": "123 Main Street, Cityville",
+    "workTime": "9:00 AM - 5:00 PM",
+    "number": 1234567890,
+    "delivery": true
+  },
+  {
+    "name": "Alice Smith",
+    "address": "456 Elm Avenue, Townsville",
+    "workTime": "10:00 AM - 6:00 PM",
+    "number": 9876543210,
+    "delivery": false
+  },
+  {
+    "name": "Bob Johnson",
+    "address": "789 Oak Lane, Villageton",
+    "workTime": "8:30 AM - 4:30 PM",
+    "number": 5551234567,
+    "delivery": true
+  },
+  {
+    "name": "Eva Anderson",
+    "address": "321 Cedar Road, Hamletville",
+    "workTime": "11:00 AM - 7:00 PM",
+    "number": 7778889999,
+    "delivery": true
+  }
+]
