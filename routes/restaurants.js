@@ -8,6 +8,7 @@ const {
   updateRestaurant,
   addRestaurant,
 } = require("../controllers/restaurants");
+const { getAllFoods, getFood } = require("../controllers/foods");
 
 router.route("/").get(getAllRestaurants).post(addRestaurant);
 router
@@ -15,5 +16,8 @@ router
   .get(getRestaurant)
   .delete(deleteRestaurant)
   .patch(updateRestaurant);
+
+router.route("/:resId/foods").get(getAllFoods);
+router.route("/:resId/foods/:id").get(getFood);
 
 module.exports = router;

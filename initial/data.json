@@ -1,30 +1,104 @@
 [
   {
-    "name": "John Doe",
-    "address": "123 Main Street, Cityville",
-    "workTime": "9:00 AM - 5:00 PM",
+    "name": "Restaurant A",
+    "address": "123 Main Street",
+    "workTime": "9:00 AM - 10:00 PM",
     "number": 1234567890,
-    "delivery": true
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Burger",
+        "type": "FastFood",
+        "calorie": 550,
+        "price": 5.99
+      },
+      {
+        "name": "Pizza",
+        "type": "FastFood",
+        "calorie": 700,
+        "price": 9.99
+      }
+    ]
   },
   {
-    "name": "Alice Smith",
-    "address": "456 Elm Avenue, Townsville",
-    "workTime": "10:00 AM - 6:00 PM",
+    "name": "Restaurant B",
+    "address": "456 Elm Street",
+    "workTime": "10:00 AM - 9:00 PM",
     "number": 9876543210,
-    "delivery": false
+    "delivery": false,
+    "foods": [
+      {
+        "name": "Sushi",
+        "type": "LocalFood",
+        "calorie": 400,
+        "price": 12.99
+      },
+      {
+        "name": "Ramen",
+        "type": "LocalFood",
+        "price": 10.99
+      }
+    ]
   },
   {
-    "name": "Bob Johnson",
-    "address": "789 Oak Lane, Villageton",
-    "workTime": "8:30 AM - 4:30 PM",
+    "name": "Restaurant C",
+    "address": "789 Oak Avenue",
+    "workTime": "8:00 AM - 11:00 PM",
     "number": 5551234567,
-    "delivery": true
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Fried Chicken",
+        "type": "FastFood",
+        "calorie": 600,
+        "price": 8.99
+      },
+      {
+        "name": "French Fries",
+        "type": "FastFood",
+        "calorie": 350,
+        "price": 2.99
+      }
+    ]
   },
   {
-    "name": "Eva Anderson",
-    "address": "321 Cedar Road, Hamletville",
-    "workTime": "11:00 AM - 7:00 PM",
-    "number": 7778889999,
-    "delivery": true
+    "name": "Restaurant D",
+    "address": "321 Maple Lane",
+    "workTime": "11:30 AM - 10:00 PM",
+    "number": 1112223333,
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Tacos",
+        "type": "LocalFood",
+        "price": 6.99
+      },
+      {
+        "name": "Enchiladas",
+        "type": "LocalFood",
+        "price": 8.99
+      }
+    ]
+  },
+  {
+    "name": "Restaurant E",
+    "address": "555 Pine Street",
+    "workTime": "7:00 AM - 9:30 PM",
+    "number": 9998887777,
+    "delivery": false,
+    "foods": [
+      {
+        "name": "Steak",
+        "type": "LocalFood",
+        "calorie": 800,
+        "price": 15.99
+      },
+      {
+        "name": "Salad",
+        "type": "LocalFood",
+        "calorie": 250,
+        "price": 7.99
+      }
+    ]
   }
 ]

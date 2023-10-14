@@ -21,8 +21,29 @@ const restaurantSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  // foods: {
-  // },
+  foods: [
+    {
+      _id: false,
+      name: {
+        type: String,
+        required: true,
+      },
+      type: {
+        type: String,
+        enum: {
+          values: ["FastFood", "LocalFood"],
+        },
+        required: true,
+      },
+      calorie: {
+        type: Number,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Restaurant", restaurantSchema);
