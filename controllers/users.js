@@ -1,9 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const { hashString, compareString } = require("../functions/hash");
 
 const signup = async (req, res) => {
   try {
     const user = req.body;
+
+    user.password = await hashString(user.password);
 
     await User.create(user);
     const token = jwt.sign(
@@ -32,6 +35,12 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).send("User Not Found");
+    }
+
+    const hashedPassword = user.password;
+    const passwordCheck = await compareString(password, hashedPassword);
+    if (!passwordCheck) {
+      return res.status(404).send("Password Is Not Correct");
     }
 
     const token = jwt.sign({ email: user.email, username: user.username }, process.env.JWT_SECRET, {
