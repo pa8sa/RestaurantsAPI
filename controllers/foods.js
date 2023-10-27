@@ -1,4 +1,8 @@
 const Restaurant = require("../models/restaurant");
+const {
+  validateAddFood: validateAdd,
+  validateUpdateFood: validateUpdate,
+} = require("../functions/validation");
 
 const getAllFoods = async (req, res) => {
   try {
@@ -51,6 +55,10 @@ const deleteFood = async (req, res) => {
 };
 
 const updateFood = async (req, res) => {
+  const { error } = validateUpdate(req.body);
+  if (error) {
+    return res.status(404).send(error.details[0].message);
+  }
   try {
     const restaurant = await Restaurant.findById(req.params.resId);
     if (!restaurant) {
@@ -71,6 +79,10 @@ const updateFood = async (req, res) => {
 };
 
 const addFood = async (req, res) => {
+  const { error } = validateAdd(req.body);
+  if (error) {
+    return res.status(404).send(error.details[0].message);
+  }
   try {
     const restaurant = await Restaurant.findById(req.params.resId);
     if (!restaurant) {

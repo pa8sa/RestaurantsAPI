@@ -13,7 +13,7 @@ function validateAddRestaurant(restaurant) {
         Joi.object({
           name: Joi.string().required().min(2).max(20),
           type: Joi.string().valid("FastFood", "LocalFood").required(),
-          calories: Joi.number(),
+          calorie: Joi.number(),
           price: Joi.number().required(),
         })
       ),
@@ -34,4 +34,31 @@ function validateUpdateRestaurant(restaurant) {
   return schema.validate(restaurant);
 }
 
-module.exports = { validateAddRestaurant, validateUpdateRestaurant };
+function validateAddFood(food) {
+  const schema = Joi.object({
+    name: Joi.string().required().min(2).max(20),
+    type: Joi.string().valid("FastFood", "LocalFood").required(),
+    calorie: Joi.number(),
+    price: Joi.number().required(),
+  });
+
+  return schema.validate(food);
+}
+
+function validateUpdateFood(food) {
+  const schema = Joi.object({
+    name: Joi.string().min(2).max(20),
+    type: Joi.string().valid("FastFood", "LocalFood"),
+    calorie: Joi.number(),
+    price: Joi.number(),
+  }).min(1);
+
+  return schema.validate(food);
+}
+
+module.exports = {
+  validateAddRestaurant,
+  validateUpdateRestaurant,
+  validateAddFood,
+  validateUpdateFood,
+};
