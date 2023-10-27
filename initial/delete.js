@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 const connectDB = require("../db/connect");
 const Restaurant = require("../models/restaurant");
 

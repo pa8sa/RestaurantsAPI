@@ -1,4 +1,8 @@
 const Restaurant = require("../models/restaurant");
+const {
+  validateAddRestaurant: validateAdd,
+  validateUpdateRestaurant: validateUpdate,
+} = require("../functions/validation");
 
 const getAllRestaurants = async (req, res) => {
   try {
@@ -34,6 +38,10 @@ const deleteRestaurant = async (req, res) => {
 };
 
 const updateRestaurant = async (req, res) => {
+  const { error } = validateUpdate(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
   try {
     const restaurant = await Restaurant.findByIdAndUpdate(
       req.params.id,
@@ -50,6 +58,10 @@ const updateRestaurant = async (req, res) => {
 };
 
 const addRestaurant = async (req, res) => {
+  const { error } = validateAdd(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
   try {
     const restaurant = await Restaurant.create(req.body);
     res.status(200).send(restaurant);

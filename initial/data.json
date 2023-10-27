@@ -1,103 +1,172 @@
 [
   {
-    "name": "Restaurant A",
-    "address": "123 Main Street",
-    "workTime": "9:00 AM - 10:00 PM",
-    "number": 1234567890,
+    "name": "Tasty Delights",
+    "address": "123 Main Street, Cityville",
+    "workTime": "10:00 AM - 9:00 PM",
+    "number": "123456789012",
     "delivery": true,
     "foods": [
       {
-        "name": "Burger",
+        "name": "Cheeseburger",
         "type": "FastFood",
         "calorie": 550,
-        "price": 5.99
+        "price": 8.99
       },
       {
-        "name": "Pizza",
+        "name": "Margherita Pizza",
+        "type": "LocalFood",
+        "calorie": 750,
+        "price": 12.99
+      }
+    ]
+  },
+  {
+    "name": "Spicy Bites",
+    "address": "456 Oak Avenue, Townsville",
+    "workTime": "11:00 AM - 10:00 PM",
+    "number": "987654321098",
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Hot Wings",
+        "type": "FastFood",
+        "calorie": 450,
+        "price": 9.99
+      },
+      {
+        "name": "Sushi Roll",
+        "type": "LocalFood",
+        "calorie": 600,
+        "price": 15.99
+      }
+    ]
+  },
+  {
+    "name": "Café Mornings",
+    "address": "789 Maple Lane, Villagetown",
+    "workTime": "8:00 AM - 6:00 PM",
+    "number": "456123789456",
+    "delivery": false,
+    "foods": [
+      {
+        "name": "Croissant",
+        "type": "FastFood",
+        "calorie": 350,
+        "price": 3.99
+      },
+      {
+        "name": "Panini",
+        "type": "LocalFood",
+        "calorie": 550,
+        "price": 7.99
+      }
+    ]
+  },
+  {
+    "name": "Burger Haven",
+    "address": "101 Pine Street, Suburbia",
+    "workTime": "11:30 AM - 8:30 PM",
+    "number": "321654987032",
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Classic Burger",
+        "type": "FastFood",
+        "calorie": 500,
+        "price": 6.99
+      },
+      {
+        "name": "BBQ Ribs",
+        "type": "LocalFood",
+        "calorie": 850,
+        "price": 17.99
+      }
+    ]
+  },
+  {
+    "name": "Pizza Palace",
+    "address": "567 Elm Avenue, Metropolis",
+    "workTime": "10:30 AM - 9:30 PM",
+    "number": "789012345678",
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Pepperoni Pizza",
         "type": "FastFood",
         "calorie": 700,
+        "price": 11.99
+      },
+      {
+        "name": "Mushroom Risotto",
+        "type": "LocalFood",
+        "calorie": 600,
+        "price": 14.99
+      }
+    ]
+  },
+  {
+    "name": "Sushi Sensation",
+    "address": "333 Sakura Lane, Zen City",
+    "workTime": "12:00 PM - 10:00 PM",
+    "number": "444555666111",
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Sashimi Platter",
+        "type": "LocalFood",
+        "calorie": 400,
+        "price": 18.99
+      }
+    ]
+  },
+  {
+    "name": "Breakfast Nook",
+    "address": "222 Sunrise Road, Mornington",
+    "workTime": "7:00 AM - 2:00 PM",
+    "number": "111222333444",
+    "delivery": false,
+    "foods": [
+      {
+        "name": "Pancakes",
+        "type": "LocalFood",
+        "calorie": 450,
+        "price": 6.99
+      },
+      {
+        "name": "Omelette",
+        "type": "LocalFood",
+        "calorie": 550,
+        "price": 7.99
+      }
+    ]
+  },
+  {
+    "name": "Mexican Fiesta",
+    "address": "777 Jalapeño Street, Salsaville",
+    "workTime": "11:30 AM - 10:00 PM",
+    "number": "666777888555",
+    "delivery": true,
+    "foods": [
+      {
+        "name": "Taco Platter",
+        "type": "LocalFood",
+        "calorie": 500,
         "price": 9.99
       }
     ]
   },
   {
-    "name": "Restaurant B",
-    "address": "456 Elm Street",
-    "workTime": "10:00 AM - 9:00 PM",
-    "number": 9876543210,
+    "name": "Mediterranean Delights",
+    "address": "444 Olive Avenue, Greek Town",
+    "workTime": "12:00 PM - 8:00 PM",
+    "number": "999888777444",
     "delivery": false,
     "foods": [
       {
-        "name": "Sushi",
+        "name": "Hummus and Pita",
         "type": "LocalFood",
-        "calorie": 400,
-        "price": 12.99
-      },
-      {
-        "name": "Ramen",
-        "type": "LocalFood",
-        "price": 10.99
-      }
-    ]
-  },
-  {
-    "name": "Restaurant C",
-    "address": "789 Oak Avenue",
-    "workTime": "8:00 AM - 11:00 PM",
-    "number": 5551234567,
-    "delivery": true,
-    "foods": [
-      {
-        "name": "Fried Chicken",
-        "type": "FastFood",
-        "calorie": 600,
-        "price": 8.99
-      },
-      {
-        "name": "French Fries",
-        "type": "FastFood",
-        "calorie": 350,
-        "price": 2.99
-      }
-    ]
-  },
-  {
-    "name": "Restaurant D",
-    "address": "321 Maple Lane",
-    "workTime": "11:30 AM - 10:00 PM",
-    "number": 1112223333,
-    "delivery": true,
-    "foods": [
-      {
-        "name": "Tacos",
-        "type": "LocalFood",
-        "price": 6.99
-      },
-      {
-        "name": "Enchiladas",
-        "type": "LocalFood",
-        "price": 8.99
-      }
-    ]
-  },
-  {
-    "name": "Restaurant E",
-    "address": "555 Pine Street",
-    "workTime": "7:00 AM - 9:30 PM",
-    "number": 9998887777,
-    "delivery": false,
-    "foods": [
-      {
-        "name": "Steak",
-        "type": "LocalFood",
-        "calorie": 800,
-        "price": 15.99
-      },
-      {
-        "name": "Salad",
-        "type": "LocalFood",
-        "calorie": 250,
-        "price": 7.99
+        "calorie": 300,
+        "price": 5.99
       }
     ]
   }

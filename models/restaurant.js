@@ -14,12 +14,12 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
   },
   number: {
-    type: Number,
+    type: String,
     required: true,
   },
   delivery: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   foods: [
     {
@@ -37,6 +37,7 @@ const restaurantSchema = new mongoose.Schema({
       },
       calorie: {
         type: Number,
+        default: 0,
       },
       price: {
         type: Number,
