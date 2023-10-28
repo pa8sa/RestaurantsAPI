@@ -16,6 +16,7 @@ async function isAdmin(req, res, next) {
 
     if (decoded.isAdmin) {
       next();
+      return
     } else {
       res.status(403).send("Access forbidden. Admin access required.");
     }

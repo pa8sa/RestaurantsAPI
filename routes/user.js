@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const {isAdmin} = require("../middlewares/admin");
+const { isAdmin } = require("../middlewares/admin");
+const { authorization: auth } = require("../middlewares/authorization");
 
 const {
   getAllUsers,
@@ -11,6 +12,6 @@ const {
 } = require("../controllers/users");
 
 router.route("/").get(isAdmin, getAllUsers);
-router.route("/:id").get(isAdmin, getUser).delete(isAdmin, deleteUser).patch(isAdmin, updateUser);
+router.route("/:id").get(isAdmin, getUser).delete(auth, deleteUser).patch(auth, updateUser);
 
 module.exports = router;
