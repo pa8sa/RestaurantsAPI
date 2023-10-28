@@ -1,6 +1,10 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { hashString, compareString } = require("../functions/hash");
+const {
+  validateAddUser: validateAdd,
+  validateUpdateUser: validateUpdate,
+} = require("../functions/validation");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -36,6 +40,10 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  const { error } = validateUpdate(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -50,7 +58,16 @@ const updateUser = async (req, res) => {
 };
 
 const signup = async (req, res) => {
+  const { error } = validateAdd(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
   try {
+    const existingUser = await User.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(400).send("Email is already in use. Please choose a different email.");
+    }
+
     const user = req.body;
 
     user.password = await hashString(user.password);

@@ -56,13 +56,35 @@ function validateUpdateFood(food) {
   return schema.validate(food);
 }
 
-function validateAddUser(user) {}
+function validateAddUser(user) {
+  const schema = Joi.object({
+    username: Joi.string().min(2).max(15).required(),
+    password: Joi.string().min(8).max(16).required(),
+    email: Joi.string().email().required(),
+    phoneNumber: Joi.string().length(11).required(),
+    address: Joi.string().min(2).max(25).required(),
+  });
 
-function validateUpdateUser(user) {}
+  return schema.validate(user);
+}
+
+function validateUpdateUser(user) {
+  const schema = Joi.object({
+    username: Joi.string().min(2).max(15),
+    password: Joi.string().min(8).max(16),
+    email: Joi.string().email(),
+    phoneNumber: Joi.string().length(11),
+    address: Joi.string().min(2).max(25),
+  }).min(1);
+
+  return schema.validate(user);
+}
 
 module.exports = {
   validateAddRestaurant,
   validateUpdateRestaurant,
   validateAddFood,
   validateUpdateFood,
+  validateAddUser,
+  validateUpdateUser,
 };
