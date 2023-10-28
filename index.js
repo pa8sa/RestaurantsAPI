@@ -5,6 +5,7 @@ const homeRouter = require("./routes/home");
 const restaurantRouter = require("./routes/restaurant");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const notFound = require("./middlewares/not-found");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use("/", homeRouter);
 app.use("/api/restaurants", restaurantRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
+app.use(notFound);
 
 const port = process.env.PORT;
 
