@@ -4,6 +4,7 @@ const connectDB = require("./db/connect");
 const homeRouter = require("./routes/home");
 const restaurantRouter = require("./routes/restaurant");
 const userRouter = require("./routes/user");
+const authRouter = require("./routes/auth");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use("/", homeRouter);
 app.use("/api/restaurants", restaurantRouter);
 app.use("/users", userRouter);
+app.use("/auth", authRouter);
 
 const port = process.env.PORT;
 

@@ -56,6 +56,10 @@ function validateUpdateFood(food) {
   return schema.validate(food);
 }
 
+function validateAddUser(user) {}
+
+function validateUpdateUser(user) {}
+
 module.exports = {
   validateAddRestaurant,
   validateUpdateRestaurant,

@@ -2,6 +2,53 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { hashString, compareString } = require("../functions/hash");
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).send(users);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      res.status(404).send("User Doesnt Found");
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndDelete(req.params.id);
+    if (!user) {
+      res.status(404).send("User Doesnt Found");
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!user) {
+      res.status(404).send("User Doesnt Found");
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const signup = async (req, res) => {
   try {
     const user = req.body;
@@ -10,7 +57,7 @@ const signup = async (req, res) => {
 
     await User.create(user);
     const token = jwt.sign(
-      { email: user.email, username: user.username },
+      { email: user.email, username: user.username, isAdmin: user.isAdmin },
       process.env.JWT_SECRET,
       {
         expiresIn: "30d",
@@ -43,9 +90,13 @@ const login = async (req, res) => {
       return res.status(404).send("Password Is Not Correct");
     }
 
-    const token = jwt.sign({ email: user.email, username: user.username }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    const token = jwt.sign(
+      { email: user.email, username: user.username, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30d",
+      }
+    );
 
     res.status(200).send(token);
   } catch (error) {
@@ -77,4 +128,8 @@ module.exports = {
   signup,
   login,
   dashboard,
+  getAllUsers,
+  getUser,
+  deleteUser,
+  updateUser,
 };

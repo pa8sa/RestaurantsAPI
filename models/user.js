@@ -18,12 +18,16 @@ const userSchema = new mongoose.Schema({
     match: [/^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/],
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   address: {
     type: String,
     required: true,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
   },
 });
 
