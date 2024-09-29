@@ -6,14 +6,14 @@ const {
   deleteRestaurant,
   updateRestaurant,
   addRestaurant,
-} = require("../controllers/restaurants");
+} = require("../controllers/restaurant.controller");
 const {
   getAllFoods,
   getFood,
   deleteFood,
   updateFood,
   addFood,
-} = require("../controllers/foods");
+} = require("../controllers/food.controller");
 
 const restaurantRoute = () => {
   const restaurantRoute = "/restaurants";

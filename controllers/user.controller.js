@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("../models/user.model");
 const { hashString, compareString } = require("../functions/hash");
 const {
   validateAddUser: validateAdd,

@@ -6,7 +6,7 @@ const {
   getUser,
   deleteUser,
   updateUser,
-} = require("../controllers/users");
+} = require("../controllers/user.controller");
 
 const userRoute = () => {
   const userRoute = "/users";
