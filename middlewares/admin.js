@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../configs/config");
 
 async function isAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -9,14 +10,14 @@ async function isAdmin(req, res, next) {
 
   const token = authHeader.split(" ")[1];
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send("Unauthorized");
     }
 
     if (decoded.isAdmin) {
       next();
-      return
+      return;
     } else {
       res.status(403).send("Access forbidden. Admin access required.");
     }

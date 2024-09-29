@@ -1,30 +1,44 @@
-require("dotenv").config();
 const express = require("express");
+const { PORT, MONGO_URL } = require("./configs/config");
 const connectDB = require("./db/connect");
-const homeRouter = require("./routes/home");
-const restaurantRouter = require("./routes/restaurant");
-const userRouter = require("./routes/user");
-const authRouter = require("./routes/auth");
-const notFound = require("./middlewares/not-found");
+const { restaurantRoute } = require("./routes/restaurant.route");
+const { userRoute } = require("./routes/user.route");
+const { authRoute } = require("./routes/auth.route");
 
 const app = express();
+const port = PORT;
 
-app.use(express.json());
-app.use("/", homeRouter);
-app.use("/api/restaurants", restaurantRouter);
-app.use("/users", userRouter);
-app.use("/auth", authRouter);
-app.use(notFound);
-
-const port = process.env.PORT;
-
-const start = async () => {
+const initializeMiddlewares = () => {
   try {
-    await connectDB(process.env.MONGO_URL);
+    app.use(express.json());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const initializeRoutes = (routes) => {
+  routes.forEach((route) => {
+    app.use("/", route());
+  });
+};
+
+const dbConnection = async () => {
+  try {
+    await connectDB(MONGO_URL);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const listen = async () => {
+  try {
     app.listen(port, console.log(`server is running on port ${port}`));
   } catch (error) {
     console.log(error);
   }
 };
 
-start();
+initializeMiddlewares();
+initializeRoutes([userRoute, restaurantRoute, authRoute]);
+dbConnection();
+listen();

@@ -5,6 +5,7 @@ const {
   validateAddUser: validateAdd,
   validateUpdateUser: validateUpdate,
 } = require("../functions/validation");
+const { JWT_SECRET } = require("../configs/config");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -65,7 +66,9 @@ const signup = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
-      return res.status(400).send("Email is already in use. Please choose a different email.");
+      return res
+        .status(400)
+        .send("Email is already in use. Please choose a different email.");
     }
 
     const user = req.body;
@@ -75,7 +78,7 @@ const signup = async (req, res) => {
     await User.create(user);
     const token = jwt.sign(
       { email: user.email, username: user.username, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       {
         expiresIn: "30d",
       }
@@ -109,7 +112,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign(
       { email: user.email, username: user.username, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       {
         expiresIn: "30d",
       }
@@ -132,7 +135,7 @@ const dashboard = async (req, res) => {
 
     const token = authHeader.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
 
     res.status(200).send(decoded);
   } catch (error) {
