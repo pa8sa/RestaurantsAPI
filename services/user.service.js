@@ -2,6 +2,18 @@ const { use } = require("bcrypt/promises");
 const { returnService } = require("../functions/nestedReturn");
 const User = require("../models/user.model");
 
+const createUser = async (userData) => {
+  try {
+    const user = await User.create(userData);
+
+    if (!user) returnService(false, null);
+    else returnService(true, user);
+  } catch (error) {
+    console.log(error);
+    return returnService(false, null);
+  }
+};
+
 const findAllUsers = async () => {
   try {
     const users = await User.find();
@@ -15,6 +27,16 @@ const findAllUsers = async () => {
 const findUserById = async (userId) => {
   try {
     const user = await User.findById(userId);
+    return returnService(true, user);
+  } catch (error) {
+    console.log(error);
+    return returnService(false, null);
+  }
+};
+
+const findUserByEmail = async (email) => {
+  try {
+    const user = await User.findOne({ email: email });
     return returnService(true, user);
   } catch (error) {
     console.log(error);
@@ -43,4 +65,11 @@ const updateUserById = async (userId, userData) => {
   }
 };
 
-module.exports = { findAllUsers, findUserById, deleteUserById, updateUserById };
+module.exports = {
+  createUser,
+  findAllUsers,
+  findUserById,
+  findUserByEmail,
+  deleteUserById,
+  updateUserById,
+};

@@ -11,6 +11,8 @@ const {
   findUserById,
   deleteUserById,
   updateUserById,
+  findUserByEmail,
+  createUser,
 } = require("../services/user.service");
 const { JWT_SECRET } = require("../configs/config");
 
@@ -69,21 +71,20 @@ const updateUser = async (req, res) => {
 const signup = async (req, res) => {
   const { error } = validateAdd(req.body);
   if (error) {
-    return res.status(400).send(error.details[0].message);
+    console.log(error.details[0].message);
+    return sendRes(res, false, "", null);
   }
   try {
-    const existingUser = await User.findOne({ email: req.body.email });
-    if (existingUser) {
-      return res
-        .status(400)
-        .send("Email is already in use. Please choose a different email.");
-    }
+    const existingUser = await findUserByEmail(req.body.email);
+
+    if (!existingUser.status)
+      return sendRes(res, false, "این ایمیل قبلا استفاده شده است", null);
 
     const user = req.body;
 
     user.password = await hashString(user.password);
 
-    await User.create(user);
+    await createUser(user);
     const token = jwt.sign(
       { email: user.email, username: user.username, isAdmin: user.isAdmin },
       JWT_SECRET,
@@ -92,10 +93,10 @@ const signup = async (req, res) => {
       }
     );
 
-    res.status(200).send(token);
+    return sendRes(res, true, null, token);
   } catch (error) {
     console.log(error);
-    res.status(400).send("SomeThing Doest Work");
+    return sendRes(res, false, "خطا در ثبت نام", null);
   }
 };
 
@@ -103,20 +104,16 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).send("Email And Password Are Required");
-    }
+    if (!email || !password)
+      return sendRes(res, false, "ایمیل یا رمز عبور خالی است", null);
 
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).send("User Not Found");
-    }
+    const user = await findUserByEmail(email);
+    if (!user)
+      return sendRes(res, false, "کاربری با این ایمیل وجود ندارد", null);
 
     const hashedPassword = user.password;
     const passwordCheck = await compareString(password, hashedPassword);
-    if (!passwordCheck) {
-      return res.status(404).send("Password Is Not Correct");
-    }
+    if (!passwordCheck) return sendRes(res, false, "رمز عبور اشتباه است", null);
 
     const token = jwt.sign(
       { email: user.email, username: user.username, isAdmin: user.isAdmin },
@@ -126,36 +123,16 @@ const login = async (req, res) => {
       }
     );
 
-    res.status(200).send(token);
+    return sendRes(res, true, null, token);
   } catch (error) {
     console.log(error);
-    return res.status(404).send("SomeThing Doest Work");
-  }
-};
-
-const dashboard = async (req, res) => {
-  try {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(404).send("Wrong Header");
-    }
-
-    const token = authHeader.split(" ")[1];
-
-    const decoded = jwt.verify(token, JWT_SECRET);
-
-    res.status(200).send(decoded);
-  } catch (error) {
-    console.log(error);
-    return res.status(404).send("SomeThing Doest Work");
+    return sendRes(res, false, "خطا در ورود", null);
   }
 };
 
 module.exports = {
   signup,
   login,
-  dashboard,
   getAllUsers,
   getUser,
   deleteUser,
