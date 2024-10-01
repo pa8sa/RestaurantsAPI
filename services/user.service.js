@@ -1,4 +1,3 @@
-const { use } = require("bcrypt/promises");
 const { returnService } = require("../functions/nestedReturn");
 const User = require("../models/user.model");
 
