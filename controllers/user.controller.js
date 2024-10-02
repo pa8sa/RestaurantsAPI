@@ -16,7 +16,7 @@ const {
 } = require("../services/user.service");
 const { JWT_SECRET } = require("../configs/config");
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res, next) => {
   try {
     const users = await findAllUsers();
     if (users.status) return sendRes(res, true, null, users.data);
@@ -27,7 +27,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   try {
     const user = await findUserById(req.params.id);
     if (user.status) return sendRes(res, true, null, user.data);
@@ -38,7 +38,7 @@ const getUser = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
   try {
     const user = await deleteUserById(req.params.id);
     if (user.status) return sendRes(res, true, null, user.data);
@@ -49,7 +49,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
   const { error } = validateUpdate(req.body);
   if (error) {
     console.log(error.details[0].message);
@@ -68,7 +68,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
   const { error } = validateAdd(req.body);
   if (error) {
     console.log(error.details[0].message);
@@ -100,7 +100,7 @@ const signup = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 

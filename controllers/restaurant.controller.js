@@ -10,7 +10,7 @@ const {
   createRestaurant,
 } = require("../services/restaurant.service");
 
-const getAllRestaurants = async (req, res) => {
+const getAllRestaurants = async (req, res, next) => {
   try {
     const restaurants = await findAllRestaurants();
     return sendRes(res, true, null, restaurants.data);
@@ -20,7 +20,7 @@ const getAllRestaurants = async (req, res) => {
   }
 };
 
-const getRestaurant = async (req, res) => {
+const getRestaurant = async (req, res, next) => {
   try {
     const restaurant = await findRestaurantById(req.params.id);
     if (!restaurant.status)
@@ -32,7 +32,7 @@ const getRestaurant = async (req, res) => {
   }
 };
 
-const deleteRestaurant = async (req, res) => {
+const deleteRestaurant = async (req, res, next) => {
   try {
     const restaurant = await deleteRestaurantById(req.params.id);
     if (!restaurant.status)
@@ -44,7 +44,7 @@ const deleteRestaurant = async (req, res) => {
   }
 };
 
-const updateRestaurant = async (req, res) => {
+const updateRestaurant = async (req, res, next) => {
   const { error } = validateUpdate(req.body);
   if (error) {
     console.log(error.details[0].message);
@@ -61,7 +61,7 @@ const updateRestaurant = async (req, res) => {
   }
 };
 
-const addRestaurant = async (req, res) => {
+const addRestaurant = async (req, res, next) => {
   const { error } = validateAdd(req.body);
   if (error) {
     console.log(error.details[0].message);
